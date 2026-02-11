@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Diagnostic | Calibrated Trust Study</title>
+    <link rel="stylesheet" href="styles-premium.css">
+    <link rel="stylesheet" href="scientific-rigor.css">
+    <style>
+        .diag-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 4rem auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #666;
+        }
+
+        .status-dot.green {
+            background: #10b981;
+            box-shadow: 0 0 10px #10b981;
+        }
+
+        .status-dot.red {
+            background: #ef4444;
+            box-shadow: 0 0 10px #ef4444;
+        }
+
+        .btn-run {
+            width: 100%;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: var(--color-solar-orange);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body class="luxe-hero">
+    <div class="diag-card">
+        <h2 style="margin-bottom: 0.5rem; color: var(--color-solar-orange);">System Diagnostic</h2>
+        <p style="color: var(--color-mercury); font-size: 0.9rem; margin-bottom: 2rem;">Verification tool for Supabase
+            recording and Email services.</p>
+
+        <div class="status-list">
+            <div class="status-item">
+                <span>Supabase Connectivity</span>
+                <div id="supa-status" class="status-dot"></div>
+            </div>
+            <div class="status-item">
+                <span>EmailJS Configuration</span>
+                <div id="email-status" class="status-dot"></div>
+            </div>
+            <div class="status-item">
+                <span>Data Recording Status</span>
+                <span id="data-status" style="font-size: 0.8rem; color: var(--color-mercury);">Checking...</span>
+            </div>
+        </div>
+
+        <button class="btn-run" onclick="runDiagnostic()">Run Full Check</button>
+        <button class="btn-luxe btn-secondary" onclick="window.location.href='index.html'"
+            style="width: 100%; margin-top: 1rem;">Back to Platform</button>
+
+        <div id="results"
+            style="margin-top: 2rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 4px; font-family: monospace; font-size: 0.8rem; display: none; max-height: 200px; overflow-y: auto;">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="supabase.js"></script>
+    <script src="email-service.js"></script>
+
+    <script>
+        async function runDiagnostic() {
+            const results = document.getElementById('results');
+            results.style.display = 'block';
+            results.innerHTML = '> Starting diagnostic...\n';
+
+            // 1. Check Supabase
+            const supaDot = document.getElementById('supa-status');
+            const dataStatus = document.getElementById('data-status');
+
+            try {
+                const diag = await Database.checkDiagnostic();
+                if (diag.supabase) {
+                    supaDot.className = 'status-dot green';
+                    dataStatus.innerText = `Records: ${diag.responsesCount} responses, ${diag.bookingsCount} bookings`;
+                    results.innerHTML += `> Supabase connected. Found ${diag.responsesCount} responses.\n`;
+                } else {
+                    supaDot.className = 'status-dot red';
+                    results.innerHTML += `> Supabase Error: ${diag.error || 'Connection failed'}\n`;
+                }
+            } catch (e) {
+                supaDot.className = 'status-dot red';
+                results.innerHTML += `> Error: ${e.message}\n`;
+            }
+
+            // 2. Check EmailJS
+            const emailDot = document.getElementById('email-status');
+            if (EmailService && EmailService.publicKey) {
+                emailDot.className = 'status-dot green';
+                results.innerHTML += `> EmailJS configured with Public Key: ${EmailService.publicKey.slice(0, 5)}...\n`;
+            } else {
+                emailDot.className = 'status-dot red';
+                results.innerHTML += `> EmailJS configuration missing.\n`;
+            }
+
+            results.innerHTML += `> Diagnostic Complete at ${new Date().toLocaleTimeString()}\n`;
+        }
+    </script>
+</body>
+
+</html>

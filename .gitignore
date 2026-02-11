@@ -1,0 +1,130 @@
+# Node modules
+node_modules/
+package-lock.json
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test files
+test-*.html
+debug-*.html
+*-test.html
+auto-fix-system.html
+
+# Temporary files
+*.tmp
+*.temp
+~*
+*.bak
+
+# Backup files
+*-OLD-BACKUP.*
+*-backup.*
+*.old
+
+# Development documentation
+.brain_archive/
+DO_THIS_NOW*.txt
+FIX_*.txt
+EMAILJS_*.txt
+WHERE_TO_CLICK_*.txt
+TEST_RESULTS.txt
+COPY_PASTE_THIS.txt
+
+# Old SQL files (keep only UNIFIED_DATABASE_COMPLETE.sql)
+database_*.sql
+fix_*.sql
+FIX_*.sql
+FORCE_*.sql
+REMOVE_*.sql
+SETUP_*.sql
+SIMPLE_*.sql
+COMPLETE_DATABASE_SETUP.sql
+
+# PowerShell scripts
+cleanup_workspace.ps1
+
+# Build files (if you add build process later)
+dist/
+build/
+.cache/
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache
+.parcel-cache
+
+# Next.js build output
+.next
+out
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+public
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*

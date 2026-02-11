@@ -1,0 +1,119 @@
+/* --- SCIENTIFIC RIGOR: PHASE 9 STYLES --- */
+
+/* --- ETHICS & DATA PRIVACY FOOTER --- */
+.ethics-footer {
+    margin-top: 4rem;
+    padding: 3rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(2, 4, 8, 0.3);
+}
+
+.ethics-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.ethics-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-solar-orange);
+    letter-spacing: 0.3em;
+    display: block;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+}
+
+.ethics-content p {
+    font-size: 0.85rem;
+    color: var(--color-mercury);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ethics-links {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.ethics-links a,
+.ethics-link-btn {
+    color: var(--color-titanium);
+    text-decoration: none;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.ethics-links a:hover,
+.ethics-link-btn:hover {
+    color: var(--color-solar-orange);
+}
+
+.divider {
+    color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- TRUST SPIDER CHART --- */
+.trust-profile-container {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#trust-spider-chart {
+    width: 100%;
+    max-width: 400px;
+    margin: 2rem auto;
+    aspect-ratio: 1/1;
+}
+
+.spider-bg {
+    fill: rgba(255, 255, 255, 0.02);
+    stroke: rgba(255, 255, 255, 0.05);
+    stroke-width: 1;
+}
+
+.spider-grid {
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 0.5;
+    stroke-dasharray: 2 2;
+}
+
+.spider-axis {
+    stroke: rgba(255, 255, 255, 0.2);
+    stroke-width: 1;
+}
+
+.spider-area {
+    fill: rgba(255, 77, 0, 0.15);
+    stroke: var(--color-solar-orange);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 10px rgba(255, 77, 0, 0.3));
+    transition: all 1s var(--weighted-inertia);
+}
+
+.spider-point {
+    fill: var(--color-solar-orange);
+    stroke: white;
+    stroke-width: 1.5;
+}
+
+.spider-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    fill: var(--color-mercury);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}

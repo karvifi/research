@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Researcher Dashboard | Calibrated Trust Study</title>
+    <link rel="stylesheet" href="styles-advanced.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .dashboard-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-primary);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--color-text-light);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .chart-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .chart-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--color-text);
+        }
+        
+        .data-table {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: var(--color-bg-alt);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--color-border);
+        }
+        
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--color-border-light);
+        }
+        
+        tr:hover {
+            background: var(--color-bg-alt);
+        }
+        
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .status-completed {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .status-in-progress {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .export-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="dashboard-header">
+            <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">Researcher Dashboard</h1>
+            <p style="color: var(--color-text-light);">Real-time analytics for Calibrated Trust Research Study</p>
+            <div class="export-buttons" style="margin-top: 1.5rem;">
+                <button class="btn btn-primary" onclick="exportToCSV()">📊 Export CSV</button>
+                <button class="btn btn-secondary" onclick="exportToJSON()">💾 Export JSON</button>
+                <button class="btn btn-secondary" onclick="refreshDashboard()">🔄 Refresh Data</button>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="total-responses">0</div>
+                <div class="stat-label">Total Responses</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="completed-responses">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="avg-completion-time">0</div>
+                <div class="stat-label">Avg. Time (min)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="completion-rate">0%</div>
+                <div class="stat-label">Completion Rate</div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3 class="chart-title">Pathway Distribution</h3>
+                <canvas id="pathwayChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3 class="chart-title">Responses Over Time</h3>
+                <canvas id="timelineChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3 class="chart-title">Calibration Status</h3>
+                <canvas id="calibrationChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3 class="chart-title">Experience Levels</h3>
+                <canvas id="experienceChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Recent Responses Table -->
+        <div class="data-table">
+            <h3 class="chart-title">Recent Responses</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Pathway</th>
+                        <th>Status</th>
+                        <th>Progress</th>
+                        <th>Started</th>
+                        <th>Duration</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="responses-table-body">
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 2rem;">
+                            Loading data...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script>
+        // Initialize Supabase
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+
+        let pathwayChart, timelineChart, calibrationChart, experienceChart;
+
+        // Load Dashboard Data
+        async function loadDashboardData() {
+            try {
+                // Fetch all responses
+                const { data: responses, error } = await supabaseClient
+                    .from('responses')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+
+                // Update stats
+                updateStats(responses);
+
+                // Update charts
+                updateCharts(responses);
+
+                // Update table
+                updateTable(responses);
+
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                alert('Failed to load dashboard data. Check console for details.');
+            }
+        }
+
+        function updateStats(responses) {
+            const total = responses.length;
+            const completed = responses.filter(r => r.status === 'completed').length;
+            const avgTime = completed > 0 
+                ? Math.round(responses.filter(r => r.completion_time_minutes).reduce((sum, r) => sum + r.completion_time_minutes, 0) / completed)
+                : 0;
+            const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+            document.getElementById('total-responses').textContent = total;
+            document.getElementById('completed-responses').textContent = completed;
+            document.getElementById('avg-completion-time').textContent = avgTime;
+            document.getElementById('completion-rate').textContent = completionRate + '%';
+        }
+
+        function updateCharts(responses) {
+            // Pathway Distribution
+            const pathways = {};
+            responses.forEach(r => {
+                if (r.pathway_id) {
+                    pathways[r.pathway_id] = (pathways[r.pathway_id] || 0) + 1;
+                }
+            });
+
+            if (pathwayChart) pathwayChart.destroy();
+            const ctx1 = document.getElementById('pathwayChart').getContext('2d');
+            pathwayChart = new Chart(ctx1, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(pathways),
+                    datasets: [{
+                        data: Object.values(pathways),
+                        backgroundColor: [
+                            'rgba(99, 102, 241, 0.8)',
+                            'rgba(236, 72, 153, 0.8)',
+                            'rgba(16, 185, 129, 0.8)',
+                            'rgba(245, 158, 11, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+
+            // Timeline Chart
+            const timeline = {};
+            responses.forEach(r => {
+                const date = new Date(r.created_at).toLocaleDateString();
+                timeline[date] = (timeline[date] || 0) + 1;
+            });
+
+            if (timelineChart) timelineChart.destroy();
+            const ctx2 = document.getElementById('timelineChart').getContext('2d');
+            timelineChart = new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: Object.keys(timeline).slice(-14),
+                    datasets: [{
+                        label: 'Responses',
+                        data: Object.values(timeline).slice(-14),
+                        borderColor: 'rgba(99, 102, 241, 1)',
+                        backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // Calibration Status
+            const calibration = {};
+            responses.forEach(r => {
+                if (r.calibration_status) {
+                    calibration[r.calibration_status] = (calibration[r.calibration_status] || 0) + 1;
+                }
+            });
+
+            if (calibrationChart) calibrationChart.destroy();
+            const ctx3 = document.getElementById('calibrationChart').getContext('2d');
+            calibrationChart = new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(calibration),
+                    datasets: [{
+                        label: 'Count',
+                        data: Object.values(calibration),
+                        backgroundColor: 'rgba(99, 102, 241, 0.8)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // Experience Levels
+            const experience = {};
+            responses.forEach(r => {
+                if (r.experience_level) {
+                    experience[r.experience_level] = (experience[r.experience_level] || 0) + 1;
+                }
+            });
+
+            if (experienceChart) experienceChart.destroy();
+            const ctx4 = document.getElementById('experienceChart').getContext('2d');
+            experienceChart = new Chart(ctx4, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(experience),
+                    datasets: [{
+                        data: Object.values(experience),
+                        backgroundColor: [
+                            'rgba(99, 102, 241, 0.8)',
+                            'rgba(236, 72, 153, 0.8)',
+                            'rgba(16, 185, 129, 0.8)',
+                            'rgba(245, 158, 11, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+        }
+
+        function updateTable(responses) {
+            const tbody = document.getElementById('responses-table-body');
+            tbody.innerHTML = '';
+
+            if (responses.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 2rem;">No responses yet</td></tr>';
+                return;
+            }
+
+            responses.slice(0, 20).forEach(response => {
+                const row = document.createElement('tr');
+                const statusClass = response.status === 'completed' ? 'status-completed' : 'status-in-progress';
+                const progress = response.questions_answered || 0;
+                const duration = response.completion_time_minutes || Math.round((new Date() - new Date(response.started_at)) / 60000);
+                
+                row.innerHTML = `
+                    <td><code>${response.id.substring(0, 12)}...</code></td>
+                    <td>${response.pathway_id || '-'}</td>
+                    <td><span class="status-badge ${statusClass}">${response.status}</span></td>
+                    <td>${progress} questions</td>
+                    <td>${new Date(response.started_at).toLocaleString()}</td>
+                    <td>${duration} min</td>
+                    <td><button class="btn btn-secondary" style="padding: 0.5rem 1rem;" onclick="viewResponse('${response.id}')">View</button></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        async function exportToCSV() {
+            const { data: responses } = await supabaseClient
+                .from('responses')
+                .select('*');
+
+            let csv = 'ID,Pathway,Status,Experience,Adoption Route,Calibration,Org Type,Questions Answered,Duration,Completed At\n';
+            responses.forEach(r => {
+                csv += `"${r.id}","${r.pathway_id || ''}","${r.status}","${r.experience_level || ''}","${r.adoption_route || ''}","${r.calibration_status || ''}","${r.org_type || ''}",${r.questions_answered || 0},${r.completion_time_minutes || 0},"${r.completed_at || ''}"\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `calibrated-trust-data-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+        }
+
+        async function exportToJSON() {
+            const { data: responses } = await supabaseClient
+                .from('responses')
+                .select('*');
+
+            const { data: answers } = await supabaseClient
+                .from('answers')
+                .select('*');
+
+            const exportData = { responses, answers, exported_at: new Date().toISOString() };
+
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `calibrated-trust-data-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+        }
+
+        function refreshDashboard() {
+            loadDashboardData();
+        }
+
+        function viewResponse(id) {
+            window.open(`response-detail.html?id=${id}`, '_blank');
+        }
+
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', loadDashboardData);
+
+        // Auto-refresh every 30 seconds
+        setInterval(loadDashboardData, 30000);
+    </script>
+</body>
+</html>

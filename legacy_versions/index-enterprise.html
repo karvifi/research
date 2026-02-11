@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en" class="enterprise-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calibrated Trust Research Study | Enterprise Research Platform</title>
+    <meta name="description" content="Participate in groundbreaking research on trust in AI systems for creative professionals">
+    <link rel="stylesheet" href="styles-enterprise.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%236366f1'/><stop offset='100%' style='stop-color:%23a855f7'/></linearGradient></defs><rect width='100' height='100' rx='20' fill='url(%23g)'/><circle cx='50' cy='50' r='18' fill='white' opacity='0.95'/></svg>">
+</head>
+<body>
+    <!-- Global Progress Bar -->
+    <div class="global-progress-container" role="progressbar" aria-label="Survey completion progress">
+        <div class="global-progress-track">
+            <div class="global-progress-fill" id="global-progress-fill"></div>
+            <div class="global-progress-shimmer"></div>
+        </div>
+        <div class="global-progress-meta">
+            <span class="progress-label" id="progress-label">Getting Started</span>
+            <span class="progress-stats" id="progress-stats">0% Complete</span>
+        </div>
+    </div>
+
+    <!-- Screen Reader Announcer -->
+    <div id="sr-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+    
+    <main class="app-container">
+        <!-- ═══════════════════════════════════════════════════════════════
+             LANDING PAGE - HERO EXPERIENCE
+        ════════════════════════════════════════════════════════════════ -->
+        <div id="landing-page" class="page active">
+            <div class="landing-hero-split">
+                <!-- Left Panel: Content -->
+                <div class="hero-content-panel">
+                    <div class="hero-content-inner">
+                        <!-- Status Badge -->
+                        <div class="status-badge-group">
+                            <span class="status-badge status-live">
+                                <span class="status-indicator"></span>
+                                Live Study
+                            </span>
+                            <span class="status-badge status-count">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="7" cy="7" r="6"/>
+                                    <path d="M7 4v3l2 2"/>
+                                </svg>
+                                90-120 min
+                            </span>
+                        </div>
+
+                        <!-- Main Headline -->
+                        <h1 class="hero-headline">
+                            Calibrated Trust in
+                            <span class="gradient-text">Creative AI Partnership</span>
+                        </h1>
+
+                        <!-- Subtitle -->
+                        <p class="hero-subtitle">
+                            Join a groundbreaking study exploring how creative professionals calibrate trust in AI systems—when to rely, when to override, and how judgment evolves in real practice.
+                        </p>
+
+                        <!-- Key Features Grid -->
+                        <div class="feature-grid">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 12l2 2 4-4m5.6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <div class="feature-text">
+                                    <span class="feature-label">Auto-Save</span>
+                                    <span class="feature-desc">Resume anytime</span>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="11" width="18" height="10" rx="2"/>
+                                        <path d="M7 11V7a5 5 0 0110 0v4"/>
+                                    </svg>
+                                </div>
+                                <div class="feature-text">
+                                    <span class="feature-label">GDPR Secure</span>
+                                    <span class="feature-desc">Fully encrypted</span>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                    </svg>
+                                </div>
+                                <div class="feature-text">
+                                    <span class="feature-label">Adaptive</span>
+                                    <span class="feature-desc">Smart pathways</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CTA Buttons -->
+                        <div class="hero-actions">
+                            <button class="btn btn-primary btn-xl" onclick="startStudy()" type="button">
+                                <span>Begin Study</span>
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <path d="M5 12l7-7M12 12V5H5"/>
+                                </svg>
+                            </button>
+                            <button class="btn btn-ghost btn-xl" onclick="showInfo()" type="button">
+                                <span>Learn More</span>
+                            </button>
+                        </div>
+
+                        <!-- Trust Indicators -->
+                        <div class="trust-indicators">
+                            <div class="trust-item">
+                                <svg width="16" height="16" fill="currentColor">
+                                    <path d="M8 0L10.5 5.5 16 6.5 12 10.5 13 16 8 13 3 16 4 10.5 0 6.5 5.5 5.5z"/>
+                                </svg>
+                                <span>PhD Research</span>
+                            </div>
+                            <div class="trust-item">
+                                <svg width="16" height="16" fill="currentColor">
+                                    <circle cx="8" cy="8" r="8"/>
+                                    <path d="M6 8l2 2 4-4" stroke="white" stroke-width="2" fill="none"/>
+                                </svg>
+                                <span>Ethics Approved</span>
+                            </div>
+                            <div class="trust-item">
+                                <svg width="16" height="16" fill="currentColor">
+                                    <rect x="2" y="2" width="12" height="12" rx="2"/>
+                                </svg>
+                                <span>Anonymized</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel: Visual Element -->
+                <div class="hero-visual-panel">
+                    <div class="visual-container">
+                        <!-- Floating Cards Animation -->
+                        <div class="floating-cards">
+                            <div class="float-card card-1">
+                                <div class="card-shimmer"></div>
+                                <div class="card-content">
+                                    <div class="metric-badge">Trust Level</div>
+                                    <div class="metric-value">92%</div>
+                                    <div class="metric-trend">↗ +12% confidence</div>
+                                </div>
+                            </div>
+                            <div class="float-card card-2">
+                                <div class="card-shimmer"></div>
+                                <div class="card-content">
+                                    <div class="metric-badge">Participants</div>
+                                    <div class="metric-value">500+</div>
+                                    <div class="metric-trend">Active responses</div>
+                                </div>
+                            </div>
+                            <div class="float-card card-3">
+                                <div class="card-shimmer"></div>
+                                <div class="card-content">
+                                    <div class="metric-badge">Completion</div>
+                                    <div class="metric-value">89%</div>
+                                    <div class="metric-trend">Avg. completion rate</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Background Gradient Orbs -->
+                        <div class="gradient-orb orb-1"></div>
+                        <div class="gradient-orb orb-2"></div>
+                        <div class="gradient-orb orb-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             CONSENT PAGE - PROFESSIONAL AGREEMENT
+        ════════════════════════════════════════════════════════════════ -->
+        <div id="consent-page" class="page">
+            <div class="consent-container">
+                <div class="consent-header">
+                    <button class="btn-back" onclick="goBack('landing')" aria-label="Back to home">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="page-title-group">
+                        <h1 class="page-title">Informed Consent</h1>
+                        <p class="page-subtitle">Please review and accept the following terms to participate</p>
+                    </div>
+                </div>
+
+                <div class="consent-body">
+                    <div class="consent-card">
+                        <div class="consent-intro">
+                            <h2>Study Information</h2>
+                            <p>This research study explores how creative professionals develop and calibrate trust when working with AI systems. Your participation will contribute to foundational knowledge in human-AI collaboration.</p>
+                        </div>
+
+                        <div class="consent-checklist">
+                            <label class="consent-item">
+                                <input type="checkbox" id="consent-1" class="consent-checkbox">
+                                <div class="consent-content">
+                                    <span class="consent-label">I am 18 years or older and consent to participate voluntarily</span>
+                                    <span class="consent-detail">You may withdraw at any time without penalty</span>
+                                </div>
+                                <div class="checkbox-indicator"></div>
+                            </label>
+
+                            <label class="consent-item">
+                                <input type="checkbox" id="consent-2" class="consent-checkbox">
+                                <div class="consent-content">
+                                    <span class="consent-label">I understand the study takes 90-120 minutes with option to save progress</span>
+                                    <span class="consent-detail">Auto-save enabled; resume anytime within 30 days</span>
+                                </div>
+                                <div class="checkbox-indicator"></div>
+                            </label>
+
+                            <label class="consent-item">
+                                <input type="checkbox" id="consent-3" class="consent-checkbox">
+                                <div class="consent-content">
+                                    <span class="consent-label">I consent to anonymous data collection and academic use</span>
+                                    <span class="consent-detail">No personally identifiable information is collected</span>
+                                </div>
+                                <div class="checkbox-indicator"></div>
+                            </label>
+
+                            <label class="consent-item">
+                                <input type="checkbox" id="consent-4" class="consent-checkbox">
+                                <div class="consent-content">
+                                    <span class="consent-label">I understand data will be stored securely and used only for research</span>
+                                    <span class="consent-detail">GDPR-compliant encryption and access controls</span>
+                                </div>
+                                <div class="checkbox-indicator"></div>
+                            </label>
+
+                            <label class="consent-item">
+                                <input type="checkbox" id="consent-5" class="consent-checkbox">
+                                <div class="consent-content">
+                                    <span class="consent-label">I have read the participant information and had opportunity to ask questions</span>
+                                    <span class="consent-detail">Contact: research@trust-ai.study</span>
+                                </div>
+                                <div class="checkbox-indicator"></div>
+                            </label>
+                        </div>
+
+                        <div class="consent-error" id="consent-error">
+                            <svg width="16" height="16" fill="currentColor">
+                                <circle cx="8" cy="8" r="8"/>
+                                <path d="M8 4v5M8 11v1" stroke="white" stroke-width="2" fill="none"/>
+                            </svg>
+                            <span>Please accept all consent items to continue</span>
+                        </div>
+
+                        <div class="consent-actions">
+                            <button class="btn btn-secondary btn-lg" onclick="goBack('landing')" type="button">
+                                <span>Cancel</span>
+                            </button>
+                            <button class="btn btn-primary btn-lg" onclick="submitConsent()" type="button">
+                                <span>Accept & Continue</span>
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <path d="M5 12l7-7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             SURVEY PAGE - ENTERPRISE SINGLE-QUESTION INTERFACE
+        ════════════════════════════════════════════════════════════════ -->
+        <div id="survey-page" class="page">
+            <div class="survey-layout">
+                <!-- Left Sidebar: Context & Progress -->
+                <aside class="survey-sidebar">
+                    <div class="sidebar-content">
+                        <!-- Logo/Brand -->
+                        <div class="sidebar-brand">
+                            <div class="brand-icon">
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                    <rect width="32" height="32" rx="8" fill="url(#brand-gradient)"/>
+                                    <circle cx="16" cy="16" r="6" fill="white" opacity="0.95"/>
+                                    <defs>
+                                        <linearGradient id="brand-gradient" x1="0" y1="0" x2="32" y2="32">
+                                            <stop offset="0%" stop-color="#6366f1"/>
+                                            <stop offset="100%" stop-color="#a855f7"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div class="brand-text">
+                                <span class="brand-name">Trust Research</span>
+                                <span class="brand-subtitle">PhD Study</span>
+                            </div>
+                        </div>
+
+                        <!-- Section Progress -->
+                        <div class="section-progress-container">
+                            <h3 class="sidebar-heading">Your Progress</h3>
+                            <div class="circular-progress">
+                                <svg class="progress-ring" width="120" height="120">
+                                    <circle class="progress-ring-bg" cx="60" cy="60" r="54" stroke-width="8"/>
+                                    <circle class="progress-ring-fill" id="progress-ring-fill" cx="60" cy="60" r="54" stroke-width="8"/>
+                                </svg>
+                                <div class="progress-ring-label">
+                                    <span class="progress-percent" id="progress-percent">0%</span>
+                                    <span class="progress-text">Complete</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Section Breadcrumb -->
+                            <div class="section-breadcrumb" id="section-breadcrumb">
+                                <!-- Dynamically generated -->
+                            </div>
+
+                            <!-- Stats -->
+                            <div class="progress-stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-value" id="stat-answered">0</span>
+                                    <span class="stat-label">Answered</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" id="stat-remaining">0</span>
+                                    <span class="stat-label">Remaining</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" id="stat-time">0min</span>
+                                    <span class="stat-label">Elapsed</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="sidebar-actions">
+                            <button class="sidebar-action-btn" onclick="saveProgress()" title="Save progress">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/>
+                                    <polyline points="17 21 17 13 7 13 7 21"/>
+                                    <polyline points="7 3 7 8 15 8"/>
+                                </svg>
+                                <span>Save</span>
+                                <kbd class="kbd">Ctrl+S</kbd>
+                            </button>
+                            <button class="sidebar-action-btn" onclick="pauseStudy()" title="Take a break">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <rect x="10" y="8" width="1.5" height="8" rx="0.75"/>
+                                    <rect x="14" y="8" width="1.5" height="8" rx="0.75"/>
+                                </svg>
+                                <span>Pause</span>
+                            </button>
+                        </div>
+
+                        <!-- Help Link -->
+                        <div class="sidebar-help">
+                            <a href="#" class="help-link" onclick="showHelp(); return false;">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="8" cy="8" r="7"/>
+                                    <path d="M8 12v.01M8 8a2 2 0 002-2V5a2 2 0 10-4 0"/>
+                                </svg>
+                                <span>Need help?</span>
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Content: Question Interface -->
+                <div class="survey-main">
+                    <div class="question-container" id="question-container">
+                        <!-- Question Header -->
+                        <div class="question-header">
+                            <div class="question-meta">
+                                <span class="question-number" id="question-number">Question 1 of 45</span>
+                                <span class="question-section" id="question-section">Background</span>
+                            </div>
+                        </div>
+
+                        <!-- Question Content -->
+                        <div class="question-content">
+                            <h2 class="question-title" id="question-title">
+                                What is your primary professional role?
+                            </h2>
+                            <p class="question-description" id="question-description">
+                                Select the role that best describes your current position
+                            </p>
+
+                            <!-- Answer Area -->
+                            <div class="answer-area" id="answer-area">
+                                <!-- Dynamically generated based on question type -->
+                            </div>
+
+                            <!-- Validation Feedback -->
+                            <div class="validation-feedback" id="validation-feedback">
+                                <svg width="16" height="16" fill="currentColor">
+                                    <circle cx="8" cy="8" r="8"/>
+                                    <path d="M8 4v5M8 11v1" stroke="white" stroke-width="2" fill="none"/>
+                                </svg>
+                                <span id="validation-message">Please provide an answer to continue</span>
+                            </div>
+
+                            <!-- Optional Helper Text -->
+                            <div class="question-helper" id="question-helper">
+                                <!-- Optional helper content -->
+                            </div>
+                        </div>
+
+                        <!-- Navigation -->
+                        <div class="question-navigation">
+                            <button class="btn btn-ghost btn-lg" id="btn-previous" onclick="previousQuestion()" type="button">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <path d="M15 8H3M8 3l-5 5 5 5"/>
+                                </svg>
+                                <span>Previous</span>
+                            </button>
+                            
+                            <button class="btn btn-primary btn-lg" id="btn-next" onclick="nextQuestion()" type="button">
+                                <span>Continue</span>
+                                <kbd class="kbd-inline">Enter</kbd>
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <path d="M3 8h12M11 3l5 5-5 5"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             COMPLETION PAGE - CELEBRATION
+        ════════════════════════════════════════════════════════════════ -->
+        <div id="completion-page" class="page">
+            <div class="completion-container">
+                <div class="completion-content">
+                    <!-- Success Animation -->
+                    <div class="success-animation">
+                        <div class="success-checkmark">
+                            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                <circle cx="40" cy="40" r="38" stroke="url(#success-gradient)" stroke-width="4"/>
+                                <path d="M25 40l10 10 20-20" stroke="url(#success-gradient)" stroke-width="5" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="success-gradient" x1="0" y1="0" x2="80" y2="80">
+                                        <stop offset="0%" stop-color="#10b981"/>
+                                        <stop offset="100%" stop-color="#3b82f6"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="confetti-burst"></div>
+                    </div>
+
+                    <h1 class="completion-title">Study Complete!</h1>
+                    <p class="completion-message">Thank you for your invaluable contribution to advancing research on human-AI collaboration. Your insights will help shape the future of creative AI systems.</p>
+
+                    <div class="completion-stats">
+                        <div class="completion-stat">
+                            <span class="stat-icon">⏱️</span>
+                            <span class="stat-value" id="completion-time">95 minutes</span>
+                            <span class="stat-label">Time invested</span>
+                        </div>
+                        <div class="completion-stat">
+                            <span class="stat-icon">✓</span>
+                            <span class="stat-value" id="completion-answers">45 questions</span>
+                            <span class="stat-label">Completed</span>
+                        </div>
+                        <div class="completion-stat">
+                            <span class="stat-icon">🎯</span>
+                            <span class="stat-value">100%</span>
+                            <span class="stat-label">Quality</span>
+                        </div>
+                    </div>
+
+                    <div class="completion-actions">
+                        <button class="btn btn-primary btn-xl" onclick="downloadResults()" type="button">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                            </svg>
+                            <span>Download Your Summary</span>
+                        </button>
+                        <button class="btn btn-ghost btn-lg" onclick="shareResults()" type="button">
+                            <span>Share with Network</span>
+                        </button>
+                    </div>
+
+                    <div class="completion-footnote">
+                        <p>Your response ID: <code id="response-id">RES-2026-A8F3D</code></p>
+                        <p class="footnote-small">Save this ID for your records. Questions? Contact <a href="mailto:research@trust-ai.study">research@trust-ai.study</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal: Info/Help -->
+    <div id="info-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-overlay" onclick="closeInfo()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">About This Study</h2>
+                <button class="modal-close" onclick="closeInfo()" aria-label="Close modal">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3>Research Overview</h3>
+                <p>This PhD research study investigates how creative professionals develop, calibrate, and maintain trust in AI systems during real-world creative work.</p>
+                
+                <h3>What to Expect</h3>
+                <ul>
+                    <li><strong>Duration:</strong> 90-120 minutes with adaptive pathways</li>
+                    <li><strong>Format:</strong> One question at a time, with auto-save</li>
+                    <li><strong>Content:</strong> Mix of multiple choice, scales, and open-ended questions</li>
+                    <li><strong>Privacy:</strong> Fully anonymous, GDPR-compliant</li>
+                </ul>
+
+                <h3>Your Rights</h3>
+                <ul>
+                    <li>Withdraw at any time without penalty</li>
+                    <li>Skip questions if uncomfortable</li>
+                    <li>Request data deletion within 30 days</li>
+                    <li>Contact researcher with questions</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary btn-lg" onclick="closeInfo(); startStudy();">
+                    <span>Begin Study</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="questions.js"></script>
+    <script src="database.js"></script>
+    <script src="app-enterprise.js"></script>
+    <script src="advanced-features.js"></script>
+</body>
+</html>

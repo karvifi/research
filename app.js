@@ -292,10 +292,8 @@ class UltimateSurveyEngine {
     }
 
     checkResume() {
-        if (typeof LocalBackup !== 'undefined') {
-            const saved = LocalBackup.loadResponse();
-            // Session resumption disabled as per user request to remove notifications
-        }
+        const saved = LocalBackup.loadResponse();
+        // Session resumption disabled as per user request to remove notifications
     }
 
     showPage(pageId) {
@@ -1766,6 +1764,45 @@ class UltimateSurveyEngine {
         return `<div class="scenario-image loaded">${visuals[type] || `<div class="scenario-placeholder">Context Node: ${type}</div>`}</div>`;
     }
 }
+
+// Local backup system for response persistence
+const LocalBackup = {
+    saveResponse(state) {
+        try {
+            const data = {
+                ...state,
+                lastSaved: Date.now()
+            };
+            localStorage.setItem('surveyResponse', JSON.stringify(data));
+            safeLog('log', 'Response saved to localStorage');
+        } catch (e) {
+            safeLog('warn', 'Failed to save response locally:', e);
+        }
+    },
+
+    loadResponse() {
+        try {
+            const data = localStorage.getItem('surveyResponse');
+            if (data) {
+                const parsed = JSON.parse(data);
+                safeLog('log', 'Response loaded from localStorage');
+                return parsed;
+            }
+        } catch (e) {
+            safeLog('warn', 'Failed to load response from localStorage:', e);
+        }
+        return null;
+    },
+
+    clearResponse() {
+        try {
+            localStorage.removeItem('surveyResponse');
+            safeLog('log', 'Response cleared from localStorage');
+        } catch (e) {
+            safeLog('warn', 'Failed to clear response from localStorage:', e);
+        }
+    }
+};
 
 let surveyEngine;
 document.addEventListener('DOMContentLoaded', () => { surveyEngine = new UltimateSurveyEngine(); });

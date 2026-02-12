@@ -1,0 +1,12 @@
+CRITICAL FIX: Google OAuth Auto-Fill
+
+Problem: Browser tracking prevention blocks sessionStorage
+Solution: Direct form filling that bypasses sessionStorage
+
+To Deploy:
+1. Double-click deploy.bat
+2. Wait 2-3 minutes
+3. Test at https://karvifi.github.io/interview/
+
+The fix will now fill the form directly using the user object,
+not relying on sessionStorage at all.

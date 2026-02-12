@@ -287,8 +287,12 @@ class UltimateSurveyEngine {
                 safeLog('log', `🔄 OAuth callback detected - redirecting to ${returnPage} page`);
 
                 // Mark that we've handled the OAuth redirect
-                sessionStorage.setItem('oauth_redirect', 'handled');
-                sessionStorage.setItem('should_autofill', 'true');
+                try {
+                    sessionStorage.setItem('oauth_redirect', 'handled');
+                    sessionStorage.setItem('should_autofill', 'true');
+                } catch (e) {
+                    safeLog('warn', '⚠️ SessionStorage blocked by browser');
+                }
 
                 // Clean up URL immediately
                 window.history.replaceState(null, '', window.location.pathname);
@@ -297,12 +301,17 @@ class UltimateSurveyEngine {
                 const { success, user } = await Database.getCurrentUser();
                 if (success && user) {
                     safeLog('log', `✅ Authenticated user detected: ${user.email}`);
+                    safeLog('log', `User data: Name=${user.user_metadata?.full_name || user.user_metadata?.name}, Email=${user.email}`);
 
-                    // Save to sessionStorage
-                    sessionStorage.setItem('google_user_name', user.user_metadata?.full_name || user.user_metadata?.name || '');
-                    sessionStorage.setItem('google_user_email', user.email || '');
+                    // Try to save to sessionStorage (may be blocked)
+                    try {
+                        sessionStorage.setItem('google_user_name', user.user_metadata?.full_name || user.user_metadata?.name || '');
+                        sessionStorage.setItem('google_user_email', user.email || '');
+                    } catch (e) {
+                        safeLog('warn', '⚠️ SessionStorage blocked - will use direct fill');
+                    }
 
-                    // Save to state
+                    // Save to state (this always works)
                     this.state.googleUser = user;
                     this.state.participantEmail = user.email;
                     this.state.participantName = user.user_metadata?.full_name || user.user_metadata?.name;
@@ -311,18 +320,40 @@ class UltimateSurveyEngine {
                 // Redirect to the appropriate page IMMEDIATELY
                 if (returnPage === 'scheduler') {
                     this.startInterview(); // Interview flow with calendar
+                    // DIRECTLY fill the form after page loads (don't rely on sessionStorage)
+                    setTimeout(() => {
+                        if (user) {
+                            safeLog('log', '🔄 Direct auto-fill (bypassing sessionStorage)');
+                            this.directFillForm(user, 'scheduler');
+                        }
+                    }, 1500);
                 } else if (returnPage === 'contact') {
                     this.showPage('contact'); // Study flow
+                    // DIRECTLY fill the form after page loads
+                    setTimeout(() => {
+                        if (user) {
+                            safeLog('log', '🔄 Direct auto-fill (bypassing sessionStorage)');
+                            this.directFillForm(user, 'contact');
+                        }
+                    }, 1500);
                 } else {
                     // Fallback
                     this.showPage(returnPage);
+                    setTimeout(() => {
+                        if (user) {
+                            this.directFillForm(user, returnPage);
+                        }
+                    }, 1500);
                 }
 
-                // Clear the OAuth flags after auto-fill completes (longer delay)
+                // Clear the OAuth flags after auto-fill completes
                 setTimeout(() => {
-                    sessionStorage.removeItem('oauth_redirect');
-                    sessionStorage.removeItem('oauth_return_page');
-                    // Don't remove should_autofill - let showPage handle it
+                    try {
+                        sessionStorage.removeItem('oauth_redirect');
+                        sessionStorage.removeItem('oauth_return_page');
+                    } catch (e) {
+                        // Ignore if blocked
+                    }
                     safeLog('log', '✅ OAuth redirect complete');
                 }, 3000);
 
@@ -357,6 +388,60 @@ class UltimateSurveyEngine {
         }
 
 
+    // Direct fill form - bypasses sessionStorage (for tracking prevention)
+    directFillForm(user, pageType) {
+        const userName = user.user_metadata?.full_name || user.user_metadata?.name;
+        const userEmail = user.email;
+        
+        safeLog('log', `🔄 Direct fill starting - Page: ${pageType}, Name: ${userName}, Email: ${userEmail}`);
+        
+        let attempts = 0;
+        const maxAttempts = 20;
+        
+        const tryFill = () => {
+            attempts++;
+            safeLog('log', `Attempt ${attempts}/${maxAttempts}`);
+            
+            let nameInput, emailInput;
+            
+            if (pageType === 'scheduler') {
+                nameInput = document.getElementById('booking-name');
+                emailInput = document.getElementById('booking-email');
+            } else {
+                nameInput = document.getElementById('contact-name');
+                emailInput = document.getElementById('contact-email');
+            }
+            
+            let filled = false;
+            
+            if (nameInput && userName) {
+                nameInput.value = userName;
+                nameInput.dispatchEvent(new Event('input', { bubbles: true }));
+                nameInput.dispatchEvent(new Event('change', { bubbles: true }));
+                safeLog('log', `✅ Name filled: ${userName}`);
+                filled = true;
+            }
+            
+            if (emailInput && userEmail) {
+                emailInput.value = userEmail;
+                emailInput.dispatchEvent(new Event('input', { bubbles: true }));
+                emailInput.dispatchEvent(new Event('change', { bubbles: true }));
+                safeLog('log', `✅ Email filled: ${userEmail}`);
+                filled = true;
+            }
+            
+            if (!filled && attempts < maxAttempts) {
+                setTimeout(tryFill, 300);
+            } else if (filled) {
+                safeLog('log', '✅ Direct fill successful!');
+            } else {
+                safeLog('error', '❌ Direct fill failed after all attempts');
+            }
+        };
+        
+        tryFill();
+    }
+
     // Helper function to auto-fill forms from Google user data
     autoFillFromGoogle(user) {
         safeLog('log', '🔍 Attempting to auto-fill from Google user data...');
@@ -377,6 +462,7 @@ class UltimateSurveyEngine {
             const isSchedulerActive = schedulerPage && schedulerPage.classList.contains('active');
             
             safeLog('log', `Attempt ${attempt}: Contact active: ${isContactActive}, Scheduler active: ${isSchedulerActive}`);
+            safeLog('log', `Data available - Name: ${userName}, Email: ${userEmail}`);
             
             // If neither contact nor scheduler page is active, don't try to fill
             if (!isContactActive && !isSchedulerActive) {
@@ -401,36 +487,44 @@ class UltimateSurveyEngine {
                 safeLog('log', '📍 Scheduler page is active - using booking-name and booking-email fields');
             }
             
+            safeLog('log', `Fields found - Name input: ${!!nameInput}, Email input: ${!!emailInput}`);
+            
             let filled = false;
 
             if (nameInput && userName) {
                 nameInput.value = userName;
                 nameInput.dispatchEvent(new Event('input', { bubbles: true }));
+                nameInput.dispatchEvent(new Event('change', { bubbles: true }));
                 safeLog('log', `✅ Name field filled: ${nameInput.value} (field: ${nameInput.id})`);
                 filled = true;
+            } else {
+                safeLog('warn', `⚠️ Name field not filled - Input exists: ${!!nameInput}, Data exists: ${!!userName}`);
             }
             
             if (emailInput && userEmail) {
                 emailInput.value = userEmail;
                 emailInput.dispatchEvent(new Event('input', { bubbles: true }));
+                emailInput.dispatchEvent(new Event('change', { bubbles: true }));
                 safeLog('log', `✅ Email field filled: ${emailInput.value} (field: ${emailInput.id})`);
                 filled = true;
+            } else {
+                safeLog('warn', `⚠️ Email field not filled - Input exists: ${!!emailInput}, Data exists: ${!!userEmail}`);
             }
 
-            // If fields weren't filled and we haven't tried 10 times yet, try again
-            if (!filled && attempt < 10) {
-                safeLog('log', `⏳ Fields not ready, retrying in 300ms... (attempt ${attempt}/10)`);
-                setTimeout(() => attemptFill(attempt + 1), 300);
-            } else if (attempt >= 10) {
-                safeLog('error', '❌ Failed to fill fields after 10 attempts - page may have changed');
-                // Don't show alert - user may have navigated away from the form page
+            // If fields weren't filled and we haven't tried 15 times yet, try again
+            if (!filled && attempt < 15) {
+                safeLog('log', `⏳ Fields not ready, retrying in 500ms... (attempt ${attempt}/15)`);
+                setTimeout(() => attemptFill(attempt + 1), 500);
+            } else if (attempt >= 15) {
+                safeLog('error', '❌ Failed to fill fields after 15 attempts');
+                safeLog('error', `Debug info - userName: ${userName}, userEmail: ${userEmail}`);
             } else {
                 safeLog('log', '✅ Auto-fill successful!');
             }
         };
 
-        // Start attempting to fill immediately
-        attemptFill();
+        // Start attempting to fill after a delay to ensure page is ready
+        setTimeout(() => attemptFill(), 500);
 
         // Store user info in state for later use
         if (user) {

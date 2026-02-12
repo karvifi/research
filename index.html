@@ -1058,70 +1058,6 @@
             </div>
         </article>
 
-        <!-- ============================================ -->
-        <!-- PAGE 4: CONTACT & CONTEXTUAL IDENTITY        -->
-        <!-- ============================================ -->
-        <article id="contact-page" class="page" aria-labelledby="contact-title">
-            <div class="section-id">04 // CONTACT</div>
-            <div class="luxe-hero">
-                <div class="hero-content" style="max-width: 620px; margin: 0 auto;">
-                    <h1 id="contact-title" style="font-size: clamp(1.8rem, 5vw, 2.8rem); margin-bottom: 1rem;">Contact
-                        Details</h1>
-                    <p class="luxe-subtitle" style="margin-bottom: 2.5rem; font-size: 1rem; opacity: 0.8;"></p>
-
-                    <!-- Email (Required) -->
-                    <div class="luxe-input-group" style="margin-bottom: 1.5rem;">
-                        <label for="participant-email" class="form-label">Work or personal email *</label>
-                        <input type="email" id="participant-email" class="form-input" placeholder="you@example.com"
-                            style="width: 100%;" required>
-                        <p style="font-size: 0.8rem; color: var(--color-mercury); margin-top: 0.4rem;">
-                            Used only to confirm your interview appointment and send the meeting link.
-                        </p>
-                    </div>
-
-                    <!-- Role Selector (Required) -->
-                    <div class="luxe-input-group" style="margin-bottom: 1.5rem;">
-                        <label for="participant-role" class="form-label">Your current role *</label>
-                        <select id="participant-role" class="form-input" style="width: 100%;">
-                            <option value="">Select your role</option>
-                            <option value="student">Student / Recent graduate</option>
-                            <option value="early-career">Early-career professional</option>
-                            <option value="mid-career">Mid-career professional</option>
-                            <option value="senior">Senior / Leadership</option>
-                            <option value="founder">Founder / Independent</option>
-                        </select>
-                    </div>
-
-                    <!-- Industry (Optional) -->
-                    <div class="luxe-input-group" style="margin-bottom: 1.5rem;">
-                        <label for="participant-industry" class="form-label">Industry / domain (optional)</label>
-                        <input type="text" id="participant-industry" class="form-input"
-                            placeholder="e.g. Advertising, SaaS, Architecture" style="width: 100%;">
-                    </div>
-
-                    <!-- Public Profile (Optional) -->
-                    <div class="luxe-input-group" style="margin-bottom: 1.5rem;">
-                        <label for="participant-profile" class="form-label">Public profile or portfolio
-                            (optional)</label>
-                        <input type="url" id="participant-profile" class="form-input"
-                            placeholder="LinkedIn, personal website, portfolio, or company page" style="width: 100%;">
-                        <p style="font-size: 0.8rem; color: var(--color-mercury); margin-top: 0.4rem;">
-                            Optional. Provided only for contextual background and not used for identity verification.
-                        </p>
-                    </div>
-
-                    <div id="contact-error" class="error-text"
-                        style="display: none; margin-bottom: 1rem; padding: 1rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 8px;">
-                    </div>
-
-                    <button class="btn-luxe btn-primary btn-lg" type="button" onclick="surveyEngine.submitContact()"
-                        style="width: 100%;">
-                        Continue to scheduling
-                        <span class="solar-arrow">→</span>
-                    </button>
-                </div>
-            </div>
-        </article>
 
         <!-- Page 4: Terms & Conditions -->
         <article id="terms-page" class="page terms-page" aria-labelledby="terms-title">
@@ -1343,63 +1279,11 @@
                     </section>
                 </div>
 
-                <footer class="terms-footer">
-                    <p class="terms-meta">Published: February 2026</p>
-                    <div class="terms-actions">
-                        <button class="btn-luxe btn-secondary" onclick="surveyEngine.showPage('contact')">Back</button>
-                        <button class="btn-luxe btn-primary" onclick="surveyEngine.showPage('consent')">
-                            Acknowledge & Proceed
-                        </button>
-                    </div>
-                </footer>
-            </div>
-        </article>
-
-        <article id="consent-page" class="page briefing-luxe" aria-labelledby="briefing-title">
-            <div class="section-id">05 // AGREEMENT</div>
-            <div class="briefing-document text-scrim"
-                style="background: rgba(var(--rgb-carbon-dark), 0.85); padding: 4rem;">
-                <header class="briefing-header">
-                    <h1 id="briefing-title">Participation Agreement</h1>
-                    <p>Confirming your voluntary participation in this research study.</p>
-                </header>
-
-                <section class="briefing-node">
-                    <h2>Scientific Intent</h2>
-                    <p>This agreement confirms your voluntary participation in high-fidelity academic research focused
-                        on the intersection of creative professional judgment and generative intelligence.</p>
-                </section>
-
-                <section class="briefing-node">
-                    <h2>Privacy Assurance</h2>
-                    <p>Your identity is protected under academic anonymity protocols. Data is encrypted and stored in a
-                        secure cloud infrastructure, decoupled from personally identifiable markers unless explicitly
-                        authorized.</p>
-                </section>
-
-                <section class="briefing-node" style="margin-bottom: 2rem;">
-                    <h2>Formal Declarations</h2>
-                    <ul style="color: var(--color-mercury); line-height: 1.8; list-style: none; padding-left: 0;">
-                        <li style="margin-bottom: 0.8rem;">🔹 My participation is entirely voluntary and informed.</li>
-                        <li style="margin-bottom: 0.8rem;">🔹 I retain the right to terminate my session at any point.
-                        </li>
-                        <li style="margin-bottom: 0.8rem;">🔹 I consent to the recording of my session data for
-                            structural analysis.</li>
-                        <li style="margin-bottom: 0.8rem;">🔹 I authorize the use of anonymized insights for academic
-                            dissemination.</li>
-                    </ul>
-                    <div
-                        style="margin-top: 1.5rem; padding: 1rem; border-left: 3px solid var(--color-solar-orange); background: rgba(var(--rgb-solar-orange), 0.05);">
-                        <strong style="color: var(--color-titanium);">Critical Guarantee:</strong> Your specific
-                        individual data points will never be linked back to your identity in any published output.
-                    </div>
-                </section>
-
-                <div class="consent-grid luxe-check-grid">
+                <div class="consent-grid luxe-check-grid" style="margin-top: 2rem;">
                     <label class="luxe-checkbox">
                         <input type="checkbox" id="consent-1">
                         <span class="luxe-check-text">I acknowledge and accept the Research Participation
-                            Agreement.</span>
+                            Agreement and Terms & Conditions.</span>
                     </label>
                 </div>
 
@@ -1407,7 +1291,7 @@
                     ❗ Agreement must be accepted to proceed.
                 </div>
 
-                <footer class="briefing-actions">
+                <footer class="briefing-actions" style="margin-top: 2rem;">
                     <button class="btn-luxe btn-secondary" type="button" onclick="goBack('landing')">Go Back</button>
                     <button class="btn-luxe btn-primary" type="button" onclick="submitConsent()">
                         Authorize & Begin
@@ -1416,11 +1300,108 @@
             </div>
         </article>
 
+        <!-- Section: Contact Details (Study Flow - No Booking) -->
+        <article id="contact-page" class="page scheduler-luxe" aria-labelledby="contact-title">
+            <div class="luxe-hero">
+                <h1 id="contact-title">Your Contact Information</h1>
+                <p>Please provide your details to continue with the 15-minute study.</p>
+
+                <!-- Contact Form Only -->
+                <div class="booking-form text-scrim"
+                    style="margin-top: 2rem; margin-bottom: 2.5rem; padding: 2rem; border: 1px solid var(--color-solar-orange); background: var(--glass-surface); backdrop-filter: blur(20px); box-shadow: 0 0 30px rgba(255, 77, 0, 0.15);">
+                    <h3
+                        style="margin-bottom: 1.5rem; font-size: 1.25rem; color: var(--color-titanium); font-family: var(--font-heading);">
+                        Your Details
+                    </h3>
+
+                    <!-- Google Login Option -->
+                    <div class="auth-integration" style="margin-bottom: 2rem; text-align: center;">
+                        <p style="font-size: 0.9rem; color: var(--color-mercury); margin-bottom: 1rem;">Quick Fill with Google</p>
+                        <button class="btn-luxe google-login-btn" type="button" onclick="window.surveyEngine.googleLogin()"
+                            style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; width: 100%; max-width: 400px; margin: 0 auto; background: white; color: #1f2937; border: none;">
+                            <svg width="20" height="20" viewBox="0 0 24 24">
+                                <path
+                                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                                    fill="#4285F4" />
+                                <path
+                                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                                    fill="#34A853" />
+                                <path
+                                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"
+                                    fill="#FBBC05" />
+                                <path
+                                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                    fill="#EA4335" />
+                            </svg>
+                            Continue with Google
+                        </button>
+                        <div class="auth-divider" style="margin: 2rem 0; position: relative;">
+                            <span
+                                style="background: var(--color-obsidian); padding: 0 1rem; position: relative; z-index: 2; font-size: 0.8rem; color: var(--color-mercury);">OR
+                                MANUAL ENTRY</span>
+                            <div
+                                style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: rgba(255,255,255,0.1); z-index: 1;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Manual Entry Form -->
+                    <div class="luxe-input-group" style="margin-bottom: 1.2rem;">
+                        <label for="contact-name" class="form-label">Full Name *</label>
+                        <input type="text" id="contact-name" class="form-input" placeholder="John Doe" required>
+                    </div>
+                    <div class="luxe-input-group" style="margin-bottom: 1.2rem;">
+                        <label for="contact-email" class="form-label">Work or Personal Email *</label>
+                        <input type="email" id="contact-email" class="form-input"
+                            placeholder="your.email@example.com" required>
+                        <p style="font-size: 0.8rem; color: var(--color-mercury); margin-top: 0.4rem;">
+                            Used to send you the study results and follow-up information.
+                        </p>
+                    </div>
+
+                    <!-- Role Selector -->
+                    <div class="luxe-input-group" style="margin-bottom: 1.2rem;">
+                        <label for="contact-role" class="form-label">Your current role *</label>
+                        <select id="contact-role" class="form-input" style="width: 100%;">
+                            <option value="">Select your role</option>
+                            <option value="student">Student / Recent graduate</option>
+                            <option value="early-career">Early-career professional</option>
+                            <option value="mid-career">Mid-career professional</option>
+                            <option value="senior">Senior / Leadership</option>
+                            <option value="founder">Founder / Independent</option>
+                        </select>
+                    </div>
+
+                    <!-- Industry -->
+                    <div class="luxe-input-group" style="margin-bottom: 1.2rem;">
+                        <label for="contact-industry" class="form-label">Industry / domain (optional)</label>
+                        <input type="text" id="contact-industry" class="form-input"
+                            placeholder="e.g. Advertising, SaaS, Architecture" style="width: 100%;">
+                    </div>
+
+                    <!-- Public Profile -->
+                    <div class="luxe-input-group" style="margin-bottom: 1.2rem;">
+                        <label for="contact-profile" class="form-label">Public profile or portfolio
+                            (optional)</label>
+                        <input type="url" id="contact-profile" class="form-input"
+                            placeholder="LinkedIn or portfolio URL" style="width: 100%;">
+                    </div>
+                </div>
+
+                <div id="contact-error" class="error-text" style="display: none; margin: 2rem 0; padding: 1rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 8px; text-align: center;"></div>
+                
+                <button class="btn-luxe btn-primary" type="button" id="submit-contact-btn" style="width: 100%; max-width: 400px; margin: 0 auto; display: block;">
+                    Continue to Agreement →
+                </button>
+            </div>
+        </article>
+
         <!-- Section: Interview Scheduler -->
         <article id="scheduler-page" class="page scheduler-luxe" aria-labelledby="scheduler-title">
             <div class="luxe-hero">
-                <h1 id="scheduler-title">Schedule Video Interview</h1>
-                <p>Prefer a one-on-one video conversation? Schedule a time that works for you.</p>
+                <h1 id="scheduler-title">Schedule Video Interview or 15 Min Question Session</h1>
+                <p>Select your preferred engagement type. Schedule a time that works for you or join our rapid question
+                    session.</p>
 
                 <section class="calendar-card">
                     <!-- Step 1: Select Date & Time -->
@@ -1437,7 +1418,40 @@
                         <div class="cal-day-label" role="columnheader">F</div>
                         <div class="cal-day-label" role="columnheader">S</div>
                         <div class="cal-day-label" role="columnheader">S</div>
-                        <!-- Calendar days will be generated by JavaScript -->
+                        <!-- February 2026 Calendar Days -->
+                        <div class="cal-day muted">27</div>
+                        <div class="cal-day muted">28</div>
+                        <div class="cal-day muted">29</div>
+                        <div class="cal-day muted">30</div>
+                        <div class="cal-day muted">31</div>
+                        <div class="cal-day muted">1</div>
+                        <div class="cal-day muted">2</div>
+                        <div class="cal-day muted">3</div>
+                        <div class="cal-day muted">4</div>
+                        <div class="cal-day muted">5</div>
+                        <div class="cal-day muted">6</div>
+                        <div class="cal-day muted">7</div>
+                        <div class="cal-day muted">8</div>
+                        <div class="cal-day muted">9</div>
+                        <div class="cal-day muted">10</div>
+                        <div class="cal-day muted">11</div>
+                        <div class="cal-day muted">12</div>
+                        <div class="cal-day available" onclick="surveyEngine.selectDate(2026, 1, 13, this)">13</div>
+                        <div class="cal-day available" onclick="surveyEngine.selectDate(2026, 1, 14, this)">14</div>
+                        <div class="cal-day available" onclick="surveyEngine.selectDate(2026, 1, 15, this)">15</div>
+                        <div class="cal-day available" onclick="surveyEngine.selectDate(2026, 1, 16, this)">16</div>
+                        <div class="cal-day available" onclick="surveyEngine.selectDate(2026, 1, 17, this)">17</div>
+                        <div class="cal-day available" onclick="surveyEngine.selectDate(2026, 1, 18, this)">18</div>
+                        <div class="cal-day available" onclick="surveyEngine.selectDate(2026, 1, 19, this)">19</div>
+                        <div class="cal-day available" onclick="surveyEngine.selectDate(2026, 1, 20, this)">20</div>
+                        <div class="cal-day available" onclick="surveyEngine.selectDate(2026, 1, 21, this)">21</div>
+                        <div class="cal-day available" onclick="surveyEngine.selectDate(2026, 1, 22, this)">22</div>
+                        <div class="cal-day available" onclick="surveyEngine.selectDate(2026, 1, 23, this)">23</div>
+                        <div class="cal-day available" onclick="surveyEngine.selectDate(2026, 1, 24, this)">24</div>
+                        <div class="cal-day available" onclick="surveyEngine.selectDate(2026, 1, 25, this)">25</div>
+                        <div class="cal-day available" onclick="surveyEngine.selectDate(2026, 1, 26, this)">26</div>
+                        <div class="cal-day available" onclick="surveyEngine.selectDate(2026, 1, 27, this)">27</div>
+                        <div class="cal-day available" onclick="surveyEngine.selectDate(2026, 1, 28, this)">28</div>
                     </div>
                     <div class="time-slots" id="time-slots" role="listbox" aria-label="Available time slots">
                         <button class="time-btn" type="button" data-time="09:00" role="option">09:00 AM</button>
@@ -1446,22 +1460,86 @@
                         <button class="time-btn" type="button" data-time="15:30" role="option">03:30 PM</button>
                     </div>
 
+                    <!-- NEW: Unified Auth System -->
+                    <div class="auth-integration" style="margin: 2rem 0; text-align: center;">
+                        <p style="font-size: 0.9rem; color: var(--color-mercury); margin-bottom: 1.5rem;">Quick Schedule
+                            with Google</p>
+                        <button class="btn-luxe google-login-btn" onclick="surveyEngine.googleLogin()"
+                            style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; width: 100%; max-width: 400px; margin: 0 auto; background: white; color: #1f2937; border: none;">
+                            <svg width="20" height="20" viewBox="0 0 24 24">
+                                <path
+                                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                                    fill="#4285F4" />
+                                <path
+                                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                                    fill="#34A853" />
+                                <path
+                                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"
+                                    fill="#FBBC05" />
+                                <path
+                                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                    fill="#EA4335" />
+                            </svg>
+                            Continue with Google
+                        </button>
+                        <div class="auth-divider" style="margin: 2rem 0; position: relative;">
+                            <span
+                                style="background: var(--color-obsidian); padding: 0 1rem; position: relative; z-index: 2; font-size: 0.8rem; color: var(--color-mercury);">OR
+                                MANUAL ENTRY</span>
+                            <div
+                                style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: rgba(255,255,255,0.1); z-index: 1;">
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Step 2: Your Details -->
                     <div class="booking-form text-scrim"
-                        style="margin-top: 2rem; margin-bottom: 2.5rem; padding: 2rem;">
+                        style="margin-top: 2rem; margin-bottom: 2.5rem; padding: 2rem; border: 1px solid var(--color-solar-orange); background: var(--glass-surface); backdrop-filter: blur(20px); box-shadow: 0 0 30px rgba(255, 77, 0, 0.15);">
                         <h3
                             style="margin-bottom: 1.5rem; font-size: 1.25rem; color: var(--color-titanium); font-family: var(--font-heading);">
                             Your Details
                         </h3>
                         <div class="luxe-input-group" style="margin-bottom: 1.2rem;">
-                            <label for="booking-name" class="form-label">Your Name *</label>
+                            <label for="booking-name" class="form-label">Full Name *</label>
                             <input type="text" id="booking-name" class="form-input" placeholder="John Doe" required>
                         </div>
                         <div class="luxe-input-group" style="margin-bottom: 1.2rem;">
-                            <label for="booking-email" class="form-label">Email Address *</label>
+                            <label for="booking-email" class="form-label">Work or Personal Email *</label>
                             <input type="email" id="booking-email" class="form-input"
                                 placeholder="your.email@example.com" required>
+                            <p style="font-size: 0.8rem; color: var(--color-mercury); margin-top: 0.4rem;">
+                                Used to confirm your interview and send the meeting link.
+                            </p>
                         </div>
+
+                        <!-- Role Selector -->
+                        <div class="luxe-input-group" style="margin-bottom: 1.2rem;">
+                            <label for="participant-role" class="form-label">Your current role *</label>
+                            <select id="participant-role" class="form-input" style="width: 100%;">
+                                <option value="">Select your role</option>
+                                <option value="student">Student / Recent graduate</option>
+                                <option value="early-career">Early-career professional</option>
+                                <option value="mid-career">Mid-career professional</option>
+                                <option value="senior">Senior / Leadership</option>
+                                <option value="founder">Founder / Independent</option>
+                            </select>
+                        </div>
+
+                        <!-- Industry -->
+                        <div class="luxe-input-group" style="margin-bottom: 1.2rem;">
+                            <label for="participant-industry" class="form-label">Industry / domain (optional)</label>
+                            <input type="text" id="participant-industry" class="form-input"
+                                placeholder="e.g. Advertising, SaaS, Architecture" style="width: 100%;">
+                        </div>
+
+                        <!-- Public Profile -->
+                        <div class="luxe-input-group" style="margin-bottom: 1.2rem;">
+                            <label for="participant-profile" class="form-label">Public profile or portfolio
+                                (optional)</label>
+                            <input type="url" id="participant-profile" class="form-input"
+                                placeholder="LinkedIn or portfolio URL" style="width: 100%;">
+                        </div>
+
                         <div class="luxe-input-group">
                             <label for="booking-notes" class="form-label">Preferred Discussion Topics (Optional)</label>
                             <textarea id="booking-notes" class="form-input" rows="3"
@@ -1473,8 +1551,14 @@
                     <button class="btn-luxe btn-primary" type="button" id="confirm-booking-btn"
                         onclick="surveyEngine.confirmBooking()">Confirm Booking</button>
                 </section>
-                <button class="btn-luxe btn-secondary" style="margin-top: 3rem;" type="button"
-                    onclick="surveyEngine.showPage('terms')">Skip scheduling → Continue</button>
+                
+                <div style="text-align: center; margin: 2rem 0; font-size: 1rem; color: var(--color-mercury); font-family: var(--font-mono); letter-spacing: 0.2em;">
+                    OR
+                </div>
+                
+                <div id="skip-scheduling-error" class="error-text" style="display: none; margin: 2rem 0; padding: 1rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 8px; text-align: center;"></div>
+                <button class="btn-luxe btn-secondary" style="margin-top: 1rem;" type="button"
+                    onclick="surveyEngine.showPage('terms')">Skip scheduling → Go to Agreement</button>
             </div>
         </article>
 
@@ -1562,8 +1646,12 @@
                             <div class="stat-label">Time Taken</div>
                         </div>
                         <div class="stat">
-                            <div class="stat-value" id="questions-answered">--</div>
-                            <div class="stat-label">Questions</div>
+                            <div class="stat-value" id="total-answered">--</div>
+                            <div class="stat-label">Answered</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="total-skipped">--</div>
+                            <div class="stat-label">Skipped</div>
                         </div>
                     </div>
                 </footer>
@@ -1593,19 +1681,7 @@
         <p>Saving your responses...</p>
     </aside>
 
-    <!-- EmailJS for FREE Email Notifications (200 emails/month free) -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script src="email-service.js"></script>
 
-    <!-- Platform Modules -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="utils.js"></script>
-    <script src="config.js"></script>
-    <script src="supabase.js"></script>
-    <!-- Core Platform Scripts -->
-    <script src="questions.js?v=20260209-1730"></script>
-    <script src="app.js?v=20260209-1730"></script>
-    <script src="researcher-modal.js?v=20260210-1400"></script>
     <!-- Researcher Information Modal -->
     <div id="researcher-modal" class="researcher-modal" role="dialog" aria-labelledby="researcher-modal-title"
         aria-hidden="true">
@@ -2039,20 +2115,6 @@
             </div>
         </div>
 
-        <!-- External Libraries (CDNs) -->
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-        <!-- Core Logic & Services -->
-        <script src="config.js"></script>
-        <script src="questions.js"></script>
-        <script src="supabase.js"></script>
-        <script src="email-service.js"></script>
-        <script src="researcher-modal.js"></script>
-        <script src="app.js"></script>
-
-        <!-- Cookie Consent Script -->
-        <script src="cookie-consent.js"></script>
 
         <!-- External Libraries (CDN) - Load FIRST -->
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -2064,6 +2126,7 @@
         <script src="supabase.js"></script>
         <script src="email-service.js"></script>
         <script src="engagement-system.js"></script>
+        <script src="cookie-consent.js"></script>
         <script src="questions.js"></script>
         <script src="researcher-modal.js"></script>
         <script src="landing-enhancements.js"></script>

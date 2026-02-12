@@ -82,33 +82,35 @@ const EmailService = {
     async sendResearcherNotification(bookingData) {
         try {
             const params = {
-                to_name: bookingData.name,
-                to_email: bookingData.email,  // Added for researcher template
-                booking_date: bookingData.date,
-                booking_time: bookingData.time,
+                participant_name: bookingData.name,
+                participant_email: bookingData.email,
+                booking_date: bookingData.displayDate || bookingData.date,
+                booking_time: bookingData.displayTime || bookingData.time,
                 meeting_url: bookingData.meetingUrl,
                 notes: bookingData.notes || 'None',
-                study_name: 'Calibrated Trust Research Study'
+                study_name: 'Calibrated Trust Research Study',
+                researcher_email: 'research.mdh.edu@gmail.com'
             };
 
             if (typeof safeLog !== 'undefined') {
-                safeLog('log', 'Sending researcher notification');
+                safeLog('log', 'Sending researcher notification to research.mdh.edu@gmail.com');
             }
 
+            // Send to researcher email
             const response = await emailjs.send(
                 this.serviceId,
-                'template_researcher_aler', // Matches the template ID
+                'template_researcher_aler',
                 params
             );
 
             if (typeof safeLog !== 'undefined') {
-                safeLog('log', 'Researcher notification sent');
+                safeLog('log', '✅ Researcher notification sent successfully');
             }
             return { success: true, response };
 
         } catch (error) {
             if (typeof safeLog !== 'undefined') {
-                safeLog('error', 'Researcher notification failed', error);
+                safeLog('error', '❌ Researcher notification failed:', error);
             }
             return { success: false, error };
         }

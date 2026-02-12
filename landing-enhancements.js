@@ -1,7 +1,6 @@
 /* Phase 2: Landing Page Enhancement Logic */
 
 document.addEventListener('DOMContentLoaded', () => {
-    initStickyCTA();
     initScrollRevelations();
 });
 
@@ -11,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function initStickyCTA() {
     const stickyBar = document.getElementById('sticky-cta');
     const heroSection = document.querySelector('.luxe-hero');
-    
+
     if (!stickyBar || !heroSection) return;
 
     window.addEventListener('scroll', () => {
